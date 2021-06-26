@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm";
-import { AddressIn } from "../interfaces/AddressInterface.interface";
-import { AddressEntity } from "./address.entity";
+//import { AddressIn } from "../interfaces/AddressInterface.interface";
+import { userAddress } from "./address.entity";
 
 @Entity()
-export class createUserEntity{
+export class User{
   @PrimaryGeneratedColumn("uuid")
   id?:number
   @Column()
@@ -12,13 +12,13 @@ export class createUserEntity{
   lastname:string
   @Column({unique:true})
   email:string
-  @Column({select:false})
+  @Column()
   password:string
   @Column({unique:true})
   mobile:string
   @Column()
   gender:string
-  @OneToOne(()=>AddressEntity)
+  @OneToOne(()=>userAddress)
   @JoinColumn()
-  address:AddressEntity
+  address:userAddress
 }
