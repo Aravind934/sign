@@ -43,7 +43,8 @@ export class AuthService {
          return {
            success:true,
            message:`Login successful!`,
-           token
+           token,
+           user:user.firstname
          }
         }
         else return {
@@ -57,5 +58,21 @@ export class AuthService {
            message:`Email not exists`
          }
        }
+    }
+    //User Login Over
+
+    async getEmail(data:{email:string}):Promise<any>{
+            if(await this.UserRepository.findOne({email:data.email})){
+              return {
+                success:false,
+                message:`Email alredy exists`
+              }
+            }
+            else{
+              return{
+                success:true,
+                message:`Email available`
+              }
+            }
     }
 }
